@@ -1,0 +1,13 @@
+stages:
+  train:                         # nom de l'étape
+    cmd: python src/train.py     # commande à lancer
+    deps:                        # si l'un de ces fichiers change → on relance
+      - data/etudiants.csv
+      - src/train.py
+    params:                      # si ces réglages changent → on relance
+      - train
+    outs:                        # fichiers produits (versionnés par DVC)
+      - models/model.pkl
+    metrics:                     # fichier de score
+      - metrics.json:
+          cache: false
